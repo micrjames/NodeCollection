@@ -8,9 +8,18 @@ describe("A Node", () => {
 	  beforeAll(() => {
 		 node = new Node();
 	  });
-	  test.todo("Should exist.");
-	  test.todo("Should have an 'undefined' Key.");
-	  test.todo("Should have an empty collection of children.");
+	  test("Should exist.", () => {
+		 expect(node).toBeDefined();
+	  });
+	  test("Should have an 'undefined' Key.", () => {
+		 const nodeKey = node.Key;
+		 expect(nodeKey).toBeUndefined();
+	  });
+	  test("Should have an empty collection of children.", () => {
+		 const nodeChildren = node.children;
+		 const nodeChildrenSize = nodeChildren.size;
+		 expect(nodeChildrenSize).toBeFalsy();
+	  });
    });
    describe("With Operations", () => {
 	  let node: Node<number>;
