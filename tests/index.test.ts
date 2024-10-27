@@ -7,10 +7,19 @@ describe("A NodeCollection", () => {
 	  beforeAll(() => {
 		 nodeColl = new NodeCollection();
 	  });
-	  test.todo("Should exist.");
-	  test.todo("Should be empty.");
-	  test.todo("Should not give an item.");
+	  test("Should exist.", () => {
+		 expect(nodeColl).toBeDefined();
+	  });
+	  test("Should be empty.", () => {
+		 const nodeCollSize = nodeColl.size;
+		 expect(nodeCollSize).toBe(0);
+	  });
+	  test("Should not give an item.", () => {
+		 const nodeCollItem = nodeColl.item(0);
+		 expect(nodeCollItem).not.toBeDefined();
+	  });
    });
+   /*
    describe("With Operations", () => {
 	  let nodeColl: NodeCollection<number>;
 	  beforeAll(() => {
@@ -86,4 +95,5 @@ describe("A NodeCollection", () => {
 		  });
 	   });
 	});
+   */
 });

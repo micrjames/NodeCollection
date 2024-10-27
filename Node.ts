@@ -1,22 +1,24 @@
-import { YANode } from "./YANode/YANode";
 import { NodeCollection } from "./NodeCollection";
 
-export class Node<T> implements YANode<T>, IterableIterator<Node<T>> {
-   private Key: T;
+export class Node<T> {
+   private _Key: T;
    private _children: NodeCollection<T>;
 
-   private idx = 0;
-
    constructor(data: T) {
-	  this.Key = data;
-	  this._children = [];
+	  this._Key = data;
+	  this._children = new NodeCollection();
    }
 
    addChild(child: Node<T>) {
-	  this.children.push(child);
+	  // take all the children to temp children variable.
+	  // create new NodeCollection
+	  // populate new NodeCollection with children
+	  // add in child at end of children populated to new NodeCollection
    }
-
-   get children(): Array<Node<T>> {
+   get Key(): T {
+	  return this._Key;
+   }
+   get children(): NodeCollection<T> {
 	  return this._children;
    }
 }
