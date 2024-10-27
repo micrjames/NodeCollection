@@ -11,10 +11,13 @@ export class NodeCollection<T> implements IterableIterator<dataObj<Node<T>>> {
 	  this._size = 0;
 
 	  if(nodesToAdd)
-		 nodesToAdd.forEach((node, idx) => {
-			this.nodes[idx] = node;
-			this._size++;
-		 });
+		 this.nodes = Object.fromEntries(
+			Array.from({length: nodesToAdd.length}, (_, idx) => {
+			   const nodeDataPair = [idx, nodesToAdd[idx]];
+			   this._size++;
+			   return nodeDataPair;
+			})
+		 );
    }
 
    item(idx: number): Node<T> {
