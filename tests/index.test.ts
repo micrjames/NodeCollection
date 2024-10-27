@@ -20,17 +20,39 @@ describe("A NodeCollection", () => {
 		 expect(nodeCollItem).not.toBeDefined();
 	  });
    });
-   /*
    describe("With Operations", () => {
 	  let nodeColl: NodeCollection<number>;
+	  let nodeCollArr: Array<Node<number>>;
 	  beforeAll(() => {
-		 nodeColl = new NodeCollection();
+		 nodeColl = new NodeCollection(
+			 new Node(1),
+			 new Node(2),
+			 new Node(3),
+			 new Node(4),
+			 new Node(5)
+		 );
+		 const nodeCollSize = nodeColl.size;
+		 nodeCollArr = Array.from({length: nodeCollSize}, (_, idx) => nodeColl.item(idx));
 	  });
-	  test.todo("Should have the items that were added.");
-	  test.todo("Should have the item at the given index.");
-	  test.todo("Should have the size of the 'NodeCollection'.");
+	  test("Should have the items that were added.", () => {
+		 nodeCollArr.forEach((node, idx) => {
+			expect(node).toEqual(new Node(idx + 1));
+		 });
+	  });
+	  test("Should have the item at the given index.", () => {
+		 nodeCollArr.forEach((node, idx) => {
+			const Key = node.Key;
+			const children = node.children;
+			const childrenType = typeof children;
+			expect(Key).toBe(idx + 1);
+			expect(childrenType).toBe("object");
+		 });
+	  });
+	  test("Should have the size of the 'NodeCollection'.", () => {
+		 const nodeCollSize = nodeColl.size;
+		 expect(nodeCollArr).toHaveLength(nodeCollSize);
+	  });
    });
-   */
    describe("That is iterable", () => {
 	   describe("Gives each value of the Collection.", () => {
 		  let nodeColl: NodeCollection<number>;
@@ -96,7 +118,7 @@ describe("A NodeCollection", () => {
 	   });
 	   describe("Gives the values as an array.", () => {
 		  let nodeColl: NodeCollection<number>;
-		  let collectionArr: Array<dataObj<Node<number>>>;
+		  let nodeCollArr: Array<dataObj<Node<number>>>;
 		  beforeAll(() => {
 			 nodeColl = new NodeCollection(
 				new Node(1),
@@ -106,16 +128,16 @@ describe("A NodeCollection", () => {
 				new Node(5)
 			 );
 
-			 collectionArr = [...nodeColl];
+			 nodeCollArr = [...nodeColl];
 		  });
 		  test("Should not be empty.", () => {
-			 expect(collectionArr).not.toBeFalsy();
+			 expect(nodeCollArr).not.toBeFalsy();
 		  });
 		  test("Should contain 5 elements.", () => {
-			 expect(collectionArr).toHaveLength(5);
+			 expect(nodeCollArr).toHaveLength(5);
 		  });
 		  test("Should equal '[1, 2, 3, 4, 5]'", () => {
-			 expect(collectionArr).toEqual([
+			 expect(nodeCollArr).toEqual([
 				new Node(1),
 				new Node(2),
 				new Node(3),
@@ -124,13 +146,13 @@ describe("A NodeCollection", () => {
 			 ]);
 		  });
 		  test("Should iterate the elements.", () => {
-			 collectionArr.forEach((el, i) => {
-				expect(el).toEqual(new Node(i + 1));
+			 nodeCollArr.forEach((node, idx) => {
+				expect(node).toEqual(new Node(idx + 1));
 			 });
 			 let idx = 0;
-			 for(const el of collectionArr) {
+			 for(const node of nodeCollArr) {
 				++idx;
-				expect(el).toEqual(new Node(idx));
+				expect(node).toEqual(new Node(idx));
 			 }
 		  });
 	   });
