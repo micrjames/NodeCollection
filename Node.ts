@@ -4,7 +4,7 @@ export class Node<T> {
    private _Key: T;
    private _children: NodeCollection<T>;
 
-   constructor(data: T) {
+   constructor(data?: T) {
 	  this._Key = data;
 	  this._children = new NodeCollection();
    }
