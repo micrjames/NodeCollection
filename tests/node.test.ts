@@ -83,11 +83,48 @@ describe("A Node", () => {
 			});
 		 });
 		 describe("Adding a 'child'", () => {
-			test.todo("Should exist.");
-			test.todo("Should be a collection of objects.");
-			test.todo("Should hold the number of 'children' added to the 'Node'.");
-			test.todo("Should each be of type 'object'.");
-			test.todo("Should each hold the specified 'Key'.");
+			let nodeKey4Value: number;
+			let nodeKey4: Node<number>;
+			let nodeChildrenSize: number;
+			let newNodeChildrenSize: number;
+			beforeAll(() => {
+			   nodeChildrenSize = nodeChildren.size;
+			   nodeKey4Value = 4;
+			   nodeKey4 = new Node(nodeKey4Value);
+			   node.addChild(nodeKey4);
+			   nodeChildren = node.children;
+			   nodeChildrenArr = [...nodeChildrenArr, nodeKey4];
+			   newNodeChildrenSize = nodeChildren.size;
+			});
+			test("Should exist.", () => {
+			   expect(nodeChildren).toBeDefined();
+			});
+			test("Should be a collection of objects.", () => {
+			   const nodeChildrenCollection = new NodeCollection(...nodeChildrenArr);
+			   expect(nodeChildren).toEqual(nodeChildrenCollection);
+			});
+			test("Should not hold the same number of 'children' as before the method call.", () => {
+			   expect(newNodeChildrenSize).not.toBe(nodeChildrenSize);
+			});
+			test("Should hold the number of 'children' added to the 'Node'.", () => {
+			   const diffNodeChildrenSize = newNodeChildrenSize - nodeChildrenSize;
+			   expect(diffNodeChildrenSize).toBe(1);
+			});
+			test("Should each be of type 'object'.", () => {
+			   nodeChildrenArr.forEach((_, idx) => {
+				  const nodeChild = nodeChildren.item(idx);
+				  const nodeChildType = typeof nodeChild;
+				  expect(nodeChildType).toBe("object");
+			   });
+			});
+			test("Should each hold the specified 'Key'.", () => {
+			   nodeChildrenArr.forEach((_, idx) => {
+				  const nodeChildrenArrKey = nodeChildrenArr[idx].Key;
+				  const nodeChild = nodeChildren.item(idx);
+				  const nodeChildKey = nodeChild.Key;
+				  expect(nodeChildKey).toBe(nodeChildrenArrKey);
+			   });
+			});
 		 });
 	  });
    });
