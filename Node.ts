@@ -4,16 +4,15 @@ export class Node<T> {
    private _Key: T;
    private _children: NodeCollection<T>;
 
-   constructor(data?: T) {
+   constructor(data?: T, ...children: Array<Node<T>>) {
 	  this._Key = data;
-	  this._children = new NodeCollection();
+	  this._children = new NodeCollection(...children);
    }
 
    addChild(child: Node<T>) {
-	  // take all the children to temp children variable.
-	  // create new NodeCollection
-	  // populate new NodeCollection with children
-	  // add in child at end of children populated to new NodeCollection
+	  const childrenArr = Array.from({length: this._children.size}, (_, idx) => this._children.item(idx));
+	  const newChildrenArr = [...childrenArr, child];
+	  this._children = new NodeCollection(...newChildrenArr); 
    }
    get Key(): T {
 	  return this._Key;
